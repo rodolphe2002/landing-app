@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interface Admin - Ajout de formation</title>
+  <link rel="stylesheet" href="./admin.css">
+</head>
+<body>
+
+  <button id="toggle-btn">&#9776;</button>
+  <div class="sidebar">
+    <h2>ECFA Admin Dashboard</h2>
+    <nav>
+      <ul>
+        <li><a href="#form-section">Ajouter Formation</a></li>
+        <li><a href="#testimony-section">Ajouter Témoignage</a></li>
+        <li><a href="#inscriptions-section">Voir Inscriptions</a></li>
+      </ul>
+    </nav>
+  </div>
+
+
+
+
+  <div class="dashboard-container">
+        <section id="form-section" class="form-section">
+
+          <div class="form-container">
+          <p>Ajouter une nouvelle formation</p>
+
+          <form class="box-form" action="/api/formations" method="POST" enctype="multipart/form-data">
+            <input type="text" name="titre" placeholder="Titre de la formation" required>
+            <input type="text" name="slug" placeholder="Slug (ex: formation-php)" required>
+            <input type="text" name="accroche" placeholder="Phrase d'accroche" required>
+            <textarea name="description" placeholder="Description détaillée" required></textarea>
+            <input type="text" name="duree" placeholder="Durée (ex: 2 semaines)" required>
+            <input type="number" name="prix" placeholder="Prix (ex: 50000)" required>
+            <input type="text" name="videoUrl" placeholder="Lien vers la vidéo (facultatif)">
+            <input type="text" name="niveau" placeholder="Niveau (ex: Débutant, Avancé)" required>
+            <input type="text" name="categorie" placeholder="Catégorie (ex: Informatique, Business)" required>
+            <input type="date" name="dateDebut" placeholder="Date de début" required>
+            <input type="file" name="image" accept="image/*" required>
+            <button type="submit">Ajouter la formation</button>
+          </form>
+
+        </section>
+
+        <section id="testimony-section"> 
+          <p>Ajouter un témoignage client</p>
+        <form class="box-form" action="/api/temoignages" method="POST" enctype="multipart/form-data">
+          <input type="text" name="nomClient" placeholder="Nom du client" required>
+          <textarea name="message" placeholder="Message du client" required></textarea>
+
+          <select name="formationId" required id="formation-select">
+            <!-- On remplira dynamiquement avec JS ou manuellement -->
+            <!-- <option value="ID_FORMATION_1">Formation PHP</option>
+            <option value="ID_FORMATION_2">Formation Design</option> -->
+            <!-- etc -->
+          </select>
+
+          <input type="file" name="avatar" accept="image/*">
+          <button type="submit">Ajouter le témoignage</button>
+        </form>
+
+        </div>
+        </section>
+
+        <section id="inscriptions-section" class="inscriptions-section"> 
+        <h1>Liste des Inscriptions</h1>
+        <table id="inscriptions-table" class="inscriptions-table">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>WhatsApp</th>
+              <th>Formation</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+
+        </section>
+
+
+
+
+  
+  
+
+      <p id="message"></p>
+
+</div>
+
+  <script src="./main.js">
+    
+
+  
+  </script>
+
+</body>
+</html>

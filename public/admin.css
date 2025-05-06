@@ -1,0 +1,323 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background: #f9fafc;
+    color: #333;
+    padding: 2rem;
+  }
+
+  p{
+    margin-bottom: 0.5rem;
+    color: #222;
+  }
+
+  form {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+    max-width: 600px;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="file"],
+  input[type="tel"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 0.8rem;
+    margin: 0.6rem 0 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: border 0.3s;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    border-color: #4a90e2;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  button {
+    background: #4a90e2;
+    color: white;
+    padding: 0.8rem 1.6rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  button:hover {
+    background: #357ab8;
+  }
+
+  #message {
+    margin-top: 1rem;
+    font-weight: bold;
+  }
+
+  @media (max-width: 600px) {
+    body {
+      padding: 1rem;
+    }
+    form {
+      padding: 1.2rem;
+    }
+  }
+
+
+
+
+
+
+  /* .form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+   
+  } */
+  
+  /* .box-form {
+    flex: 1;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  
+        max-width: 550px;
+
+        margin-left: 200px;
+      
+      
+  } */
+
+
+  .inscriptions-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    overflow: hidden;
+    max-width: 800px;
+  }
+  
+  .inscriptions-table thead {
+    background: #4a90e2;
+    color: white;
+  }
+  
+  .inscriptions-table th,
+  .inscriptions-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .inscriptions-table tbody tr:hover {
+    background-color: #f1f5f9;
+  }
+  
+  .inscriptions-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+  
+  @media (max-width: 600px) {
+    .inscriptions-table th,
+    .inscriptions-table td {
+      padding: 0.8rem;
+      font-size: 14px;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .dashboard-container {
+    max-width: 1200px;
+    margin: auto;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .dashboard-title {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    color: #333;
+    text-align: center;
+  }
+  
+  section {
+    margin-bottom: 3rem;
+  }
+  
+  .inscriptions-section h2 {
+    margin-bottom: 0.5rem;
+  }
+  
+  #inscription-count {
+    margin-bottom: 1rem;
+    color: #555;
+    font-style: italic;
+  }
+  
+  /* Animation d’apparition */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Effet hover sur les boutons */
+  button {
+    transition: background 0.3s, transform 0.2s;
+  }
+  
+  button:hover {
+    transform: scale(1.02);
+  }
+
+
+
+
+
+
+
+  .sidebar {
+    width: 250px;
+    background: #1a1a2e;
+    color: white;
+    padding: 2rem 1rem;
+    position: fixed;
+    right: 0;
+    height: 100%;
+    animation: slideIn 0.8s ease-out;
+  }
+  
+  .sidebar h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #00bcd4;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar li {
+    margin-bottom: 1.2rem;
+  }
+  
+  .sidebar a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  .sidebar a:hover {
+    color: #00bcd4;
+  }
+  
+  .main-content {
+    margin-left: 250px;
+    padding: 2rem;
+    flex: 1;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  /* Animations */
+  @keyframes slideIn {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+
+  #toggle-btn {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1001;
+    background: #1a1a2e;
+    color: white;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    display: none;
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar {
+      position: fixed;
+      left: -250px;
+      top: 0;
+      height: 100%;
+      transition: left 0.3s ease;
+      z-index: 1000;
+    }
+
+    .sidebar h2{
+      margin-left: 47px;
+    }
+  
+    .sidebar.active {
+      left: 0;
+    }
+  
+    #toggle-btn {
+      display: block;
+    }
+  
+    .main-content {
+      margin-left: 0;
+      padding: 2rem 1rem;
+    }
+  }
+  
+  
+  
+  
+  
+  @media (min-width: 900px) {
+    .form-container {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+  
