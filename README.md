@@ -29,9 +29,9 @@ Ce projet est une application web développée avec **Node.js**, **Express**, **
 
 
    Auteur
-KOUADIO Bah Rodolphe
+Kouadio Bah Rodolphe
 
-Étudiant développeur web & mobile, passionné par la technologie.
+Développeur web & mobile, passionné par la technologie.
 
 📍 Basé à Abidjan, Côte d’Ivoire
 
