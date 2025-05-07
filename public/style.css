@@ -9,7 +9,7 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #f9f9f9;
+  background-color: #959da83c;
   color: #333;
   padding: 30px;
   line-height: 1.6;
@@ -108,8 +108,8 @@ h2 {
 /* Bouton flottant */
 .floating-btn {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 30px;
+  right: 10px;
   background-color: #0e4989;
   color: white;
   border: none;
@@ -193,9 +193,10 @@ h2 {
   }
 
   .floating-btn {
-    width: 150px;
+    width: 130px;
     height: 50px;
-    font-size: 24px;
+    font-size: 20px;
+    
   }
 
   #form-popup {

@@ -6,7 +6,7 @@
   }
 
   body {
-    background: #f9fafc;
+    background: #959da83c;
     color: #333;
     padding: 2rem;
   }
@@ -43,7 +43,7 @@
   textarea:focus,
   select:focus {
     outline: none;
-    border-color: #4a90e2;
+    border-color: #0e4989;
   }
 
   textarea {
@@ -52,7 +52,7 @@
   }
 
   button {
-    background: #4a90e2;
+    background: #0e4989;
     color: white;
     padding: 0.8rem 1.6rem;
     border: none;
@@ -118,7 +118,7 @@
   }
   
   .inscriptions-table thead {
-    background: #4a90e2;
+    background: #0e4989;
     color: white;
   }
   

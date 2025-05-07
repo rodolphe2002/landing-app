@@ -48,6 +48,7 @@ router.post('/formations', upload.single('image'), async (req, res) => {
       slug,
       accroche,
       description,
+      imageUrl,
       duree,
       prix,
       videoUrl,
