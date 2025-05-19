@@ -14,8 +14,13 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
       const data = await res.json();
   
       if (res.ok) {
+
+          // Stocker un token ou flag local (selon ton backend)
+      localStorage.setItem('adminAuth', 'true');
         // Redirection vers l’interface admin après login réussi
         window.location.href = '/admin.html';
+        
+   
       } else {
         document.getElementById('login-error').textContent = data.message;
       }
@@ -24,4 +29,9 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
       console.error(err);
     }
   });
+
+
+
+
+  
   
