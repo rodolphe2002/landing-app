@@ -87,47 +87,6 @@ async function chargerFormations() {
 
 
 
-  // const form = document.getElementById('formation-form');
-    // const message = document.getElementById('message');
-
-    // form.addEventListener('submit', async (e) => {
-    //   e.preventDefault();
-
-    //   const formData = new FormData(form);
-    //   const data = {};
-
-    //   formData.forEach((value, key) => {
-    //     data[key] = value;
-    //   });
-
-    //   try {
-    //     const res = await fetch('/api/formations', {
-    //       method: 'POST',
-    //       headers: { 'Content-Type': 'application/json' },
-    //       body: JSON.stringify(data)
-    //     });
-
-    //     const result = await res.json();
-
-    //     if (res.ok) {
-    //       message.textContent = "Formation ajoutée avec succès !";
-    //       message.className = "success";
-    //       form.reset();
-    //     } else {
-    //       message.textContent = result.message || "Erreur lors de l’ajout.";
-    //       message.className = "error";
-    //     }
-
-    //   } catch (err) {
-    //     message.textContent = "Erreur de connexion au serveur.";
-    //     message.className = "error";
-    //     console.error(err);
-    //   }
-    // });
-
-
-
-
 
 
 
@@ -252,3 +211,48 @@ document.getElementById("inscription-form").addEventListener("submit", async fun
     console.error(err);
   }
 });
+
+
+
+// logique des compteurs
+
+
+const counters = document.querySelectorAll('.counter');
+
+  const countUp = (el) => {
+    const target = +el.getAttribute('data-target');
+    let count = 0;
+    const step = Math.ceil(target / 200); // ajuster la vitesse
+
+    const updateCounter = () => {
+      if (count < target) {
+        count += step;
+        el.textContent = count > target ? target : count;
+        requestAnimationFrame(updateCounter);
+      } else {
+        el.textContent = target;
+      }
+    };
+
+    updateCounter();
+  };
+
+  const startCounting = () => {
+    counters.forEach(counter => {
+      countUp(counter);
+    });
+  };
+
+  // Démarrer le comptage quand la section est visible
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        startCounting();
+        observer.disconnect(); // arrêter l'observation après le premier déclenchement
+      }
+    });
+  }, {
+    threshold: 0.5
+  });
+
+  observer.observe(document.querySelector('.stats-section'));
