@@ -1,4 +1,4 @@
-const BASE_URL = "https://landing-app-hfxp.onrender.com/";
+const BASE_URL = "https://landing-app-1ke2.onrender.com";
 
 window.addEventListener('DOMContentLoaded', () => {
   chargerFormations();
