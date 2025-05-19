@@ -5,7 +5,7 @@ const Formation = require('../models/Formations');
 const Temoignage = require('../models/Temoignage');
 const Utilisateur = require('../models/Utlisateurs'); 
 const Admin = require('../models/Admins'); // 🛠️ adapte le chemin si besoin
-const bcrypt = require('bcrypt');
+const bcryptjs = require('bcryptjs');
 
 
 const multer = require('multer');
@@ -202,7 +202,7 @@ router.post('/login', async (req, res) => {
 
     if (!admin) return res.status(401).json({ message: "Nom d'utilisateur incorrect." });
 
-    const passwordMatch = await bcrypt.compare(password, admin.password);
+    const passwordMatch = await bcryptjs.compare(password, admin.password);
 
     if (!passwordMatch) return res.status(401).json({ message: "Mot de passe incorrect." });
 

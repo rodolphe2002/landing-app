@@ -4,7 +4,7 @@ const express = require('express');       // Framework web
 const mongoose = require('mongoose');     // Pour interagir avec MongoDB
 const bodyParser = require('body-parser');// Pour lire les données envoyées en POST
 const path = require('path');             // Pour gérer les chemins de fichiers
-const bcrypt = require('bcryptjs');
+const bcryptjs = require('bcryptjs');
 const Admin = require('./models/Admins'); // Assure-toi que ce chemin est correct
 
 require('dotenv').config();
@@ -54,16 +54,16 @@ async function createAdmin() {
     const existing = await Admin.findOne({ username: process.env.ADMIN_USERNAME });
     if (existing) return console.log("❗ Admin déjà existant.");
 
-    const hashedPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD, 10);
+    const hashedPassword = await bcryptjs.hash(process.env.ADMIN_PASSWORD, 10);
     const admin = new Admin({
       username: process.env.ADMIN_USERNAME,
       password: hashedPassword
     });
 
     await admin.save();
-    console.log('✅ Admin créé avec succès !');
+    console.log('Admin créé avec succès !');
   } catch (err) {
-    console.error('❌ Erreur création admin :', err);
+    console.error('Erreur création admin :', err);
   }
 }
 
