@@ -4,7 +4,7 @@ const express = require('express');       // Framework web
 const mongoose = require('mongoose');     // Pour interagir avec MongoDB
 const bodyParser = require('body-parser');// Pour lire les données envoyées en POST
 const path = require('path');             // Pour gérer les chemins de fichiers
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const Admin = require('./models/Admins'); // Assure-toi que ce chemin est correct
 
 require('dotenv').config();
