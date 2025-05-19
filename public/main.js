@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const isAuth = localStorage.getItem('adminAuth');
   if (isAuth !== 'true') {
     // Rediriger vers la page de login si non authentifié
-    window.location.href = '/login.html';
+    window.location.href = '/adminAuth.html';
   }
 });
 
@@ -209,6 +209,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.getElementById('logout-btn').addEventListener('click', () => {
   localStorage.removeItem('adminAuth');
-  window.location.href = '/login.html';
+  window.location.href = '/adminAuth.html';
 });
 
