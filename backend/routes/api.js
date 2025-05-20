@@ -16,7 +16,7 @@ const mongoose = require('mongoose');
 // Configuration de multer pour le stockage des fichiers
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname,'../public/img') ); //  Dossier où seront stockées les images
+    cb(null, path.join(__dirname,'../../public/img') ); //  Dossier où seront stockées les images
   },
   filename: (req, file, cb) => {
     const uniqueName = Date.now() + '-' + file.originalname;
