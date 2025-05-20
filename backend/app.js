@@ -1,34 +1,37 @@
-// Chargement des variables d'environnement
-require('dotenv').config();
-
-// Modules nécessaires
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const path = require('path');
+// Importation des modules nécessaires
+require('dotenv').config();               // Charge les variables du fichier .env
+const express = require('express');       // Framework web
+const mongoose = require('mongoose');     // Pour interagir avec MongoDB
+const bodyParser = require('body-parser');// Pour lire les données envoyées en POST
+const path = require('path');             // Pour gérer les chemins de fichiers
 const bcryptjs = require('bcryptjs');
-const Admin = require('./models/Admins');
+const Admin = require('./models/Admins'); // Assure-toi que ce chemin est correct
 
-// Initialisation de l'app
+// Création de l'application Express
 const app = express();
 
-// Middleware pour les fichiers statiques
+app.use('/img', express.static(path.join(__dirname, '../public/img')));
 app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Middlewares de parsing
+// Middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// Connexion MongoDB
+// Routes API
+const adminRoutes = require('./routes/api');
+app.use('/api', adminRoutes);
+
+// Connexion à MongoDB avec Mongoose
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ Connecté à MongoDB"))
+  .then(() => console.log(" Connecté à MongoDB"))
   .catch((err) => console.error("Erreur MongoDB :", err));
 
-// Création de l’admin (si non existant)
+// Fonction pour créer l'admin une seule fois (à exécuter manuellement si besoin)
 async function createAdmin() {
   try {
     const existing = await Admin.findOne({ username: process.env.ADMIN_USERNAME });
-    if (existing) return console.log("Admin déjà existant.");
+    if (existing) return console.log("❗ Admin déjà existant.");
 
     const hashedPassword = await bcryptjs.hash(process.env.ADMIN_PASSWORD, 10);
     const admin = new Admin({
@@ -42,13 +45,20 @@ async function createAdmin() {
     console.error('Erreur création admin :', err);
   }
 }
-createAdmin(); // exécuter une seule fois
 
-// Routes API
+// Décommente ceci UNE FOIS pour créer l’admin
+createAdmin()
+
+// Routes API (on ajoutera le fichier plus tard)
 const apiRoutes = require('./routes/api');
 app.use('/api', apiRoutes);
 
-// Lancement du serveur
+// Route API pour les inscription
+const inscriptionRoute = require('./routes/api');
+app.use('/api', inscriptionRoute);
+app.use('/api/inscriptions', require('./routes/api'));
+
+// Démarrage du serveur
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Serveur démarré sur http://localhost:${PORT}`);
