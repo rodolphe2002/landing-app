@@ -4,97 +4,123 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Interface Admin ECEFA</title>
-  <link rel="stylesheet" href="./admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="./admin.css">
 </head>
 <body>
-
-  <button id="toggle-btn">&#9776;</button>
+  <button id="toggle-btn">
+    <i class="fas fa-bars"></i>
+  </button>
+  
   <div class="sidebar">
-    <h2>ECFA Admin Dashboard</h2>
+    <div class="sidebar-header">
+      <h2>ECEFA Admin Dashboard</h2>
+    </div>
     <nav>
       <ul>
-        <li><a href="#form-section">Ajouter Formation</a></li>
-        <li><a href="#testimony-section">Ajouter Témoignage</a></li>
-        <li><a href="#inscriptions-section">Voir Inscriptions</a></li>
+        <li><a href="#form-section" class="active"><i class="fas fa-plus-circle"></i> Ajouter Formation</a></li>
+        <li><a href="#testimony-section"><i class="fas fa-comment-alt"></i> Ajouter Témoignage</a></li>
+        <li><a href="#inscriptions-section"><i class="fas fa-users"></i> Voir Inscriptions</a></li>
       </ul>
-      <button id="logout-btn">Se déconnecter</button>
-
+      <button id="logout-btn">
+        <i class="fas fa-sign-out-alt"></i> Se déconnecter
+      </button>
     </nav>
   </div>
 
-
-
-
   <div class="dashboard-container">
-        <section id="form-section" class="form-section">
-
-          <div class="form-container">
-          <p>Ajouter une nouvelle formation</p>
-
-          <form class="box-form" action="/api/formations" method="POST" enctype="multipart/form-data">
-            <input type="text" name="titre" placeholder="Titre de la formation" required>
-            <input type="text" name="slug" placeholder="Slug (ex: formation-php)" required>
-            <input type="text" name="accroche" placeholder="Phrase d'accroche" required>
-            <textarea name="description" placeholder="Description détaillée" required></textarea>
-            <input type="text" name="duree" placeholder="Durée (ex: 2 semaines)" required>
-            <input type="number" name="prix" placeholder="Prix (ex: 50000)" required>
-            <input type="text" name="videoUrl" placeholder="Lien vers la vidéo (facultatif)">
-            <input type="text" name="niveau" placeholder="Niveau (ex: Débutant, Avancé)" required>
-            <input type="text" name="categorie" placeholder="Catégorie (ex: Informatique, Business)" required>
-            <input type="date" name="dateDebut" placeholder="Date de début" required>
-            <input type="file" name="image" accept="image/*" required>
-            <button type="submit">Ajouter la formation</button>
-          </form>
-
-        </section>
-
-        <section id="testimony-section"> 
-          <p>Ajouter un témoignage client</p>
-        <form class="box-form" action="/api/temoignages" method="POST" enctype="multipart/form-data">
-          <input type="text" name="nomClient" placeholder="Nom du client" required>
-          <textarea name="message" placeholder="Message du client" required></textarea>
-
-          <select name="formationId" required id="formation-select">
-            <!-- On remplira dynamiquement avec JS ou manuellement -->
-            <!-- <option value="ID_FORMATION_1">Formation PHP</option>
-            <option value="ID_FORMATION_2">Formation Design</option> -->
-            <!-- etc -->
-          </select>
-
-          <input type="file" name="avatar" accept="image/*">
-          <button type="submit">Ajouter le témoignage</button>
-        </form>
-
+    <section id="form-section" class="form-section">
+      <div class="section-title">
+        <h2><i class="fas fa-book"></i> Ajouter une nouvelle formation</h2>
+      </div>
+      
+      <form class="box-form" action="/api/formations" method="POST" enctype="multipart/form-data">
+        <div>
+          <input type="text" name="titre" placeholder="Titre de la formation" required>
         </div>
-        </section>
+        <div>
+          <input type="text" name="slug" placeholder="Slug (ex: formation-php)" required>
+        </div>
+        <div>
+          <input type="text" name="accroche" placeholder="Phrase d'accroche" required>
+        </div>
+        <div>
+          <textarea name="description" placeholder="Description détaillée" required></textarea>
+        </div>
+        <div>
+          <input type="text" name="duree" placeholder="Durée (ex: 2 semaines)" required>
+        </div>
+        <div>
+          <input type="number" name="prix" placeholder="Prix (ex: 50000)" required>
+        </div>
+        <div>
+          <input type="text" name="videoUrl" placeholder="Lien vers la vidéo (facultatif)">
+        </div>
+        <div>
+          <input type="text" name="niveau" placeholder="Niveau (ex: Débutant, Avancé)" required>
+        </div>
+        <div>
+          <input type="text" name="categorie" placeholder="Catégorie (ex: Informatique, Business)" required>
+        </div>
+        <div>
+          <input type="date" name="dateDebut" placeholder="Date de début" required>
+        </div>
+        <div>
+          <label for="image-upload" style="display: block; margin-bottom: 10px; font-weight: 500;">Image de la formation:</label>
+          <input type="file" name="image" id="image-upload" accept="image/*" required>
+        </div>
+        <button type="submit"><i class="fas fa-plus"></i> Ajouter la formation</button>
+      </form>
+    </section>
 
-        <section id="inscriptions-section" class="inscriptions-section"> 
-        <h1>Liste des Inscriptions</h1>
-        <table id="inscriptions-table" class="inscriptions-table">
-          <thead>
-            <tr>
-              <th>Nom</th>
-              <th>WhatsApp</th>
-              <th>Formation</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+    <section id="testimony-section" class="form-section"> 
+      <div class="section-title">
+        <h2><i class="fas fa-comment-medical"></i> Ajouter un témoignage client</h2>
+      </div>
+      
+      <form class="box-form" action="/api/temoignages" method="POST" enctype="multipart/form-data">
+        <div>
+          <input type="text" name="nomClient" placeholder="Nom du client" required>
+        </div>
+        <div>
+          <textarea name="message" placeholder="Message du client" required></textarea>
+        </div>
+        <div>
+          <select name="formationId" required id="formation-select">
+            <option value="" disabled selected>Sélectionnez une formation</option>
+            <!-- Les options seront chargées dynamiquement -->
+          </select>
+        </div>
+        <div>
+          <label for="avatar-upload" style="display: block; margin-bottom: 10px; font-weight: 500;">Avatar du client:</label>
+          <input type="file" name="avatar" id="avatar-upload" accept="image/*">
+        </div>
+        <button type="submit"><i class="fas fa-plus"></i> Ajouter le témoignage</button>
+      </form>
+    </section>
 
-        </section>
+    <section id="inscriptions-section" class="inscriptions-section"> 
+      <div class="section-title">
+        <h2><i class="fas fa-user-graduate"></i> Liste des Inscriptions</h2>
+      </div>
+      
+      <table id="inscriptions-table" class="inscriptions-table">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>WhatsApp</th>
+            <th>Formation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Les inscriptions seront chargées dynamiquement -->
+        </tbody>
+      </table>
+    </section>
 
+    <p id="message"></p>
+  </div>
 
-
-
-  
-  
-
-      <p id="message"></p>
-
-</div>
-
-  <script src="./main.js"></script>
-    <script src="./admin.js"></script>
-
+  <script src="./admin.js"></script>
 </body>
 </html>

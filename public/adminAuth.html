@@ -3,16 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Connexion Admin</title>
+  <title>Connexion Admin | Formation Premium</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="./adminAuth.css">
 </head>
 <body>
   <div class="login-container">
-    <h2>Connexion Admin</h2>
-    <form id="login-form" action="/api/login" method="POST">
-      <input type="text" name="username" placeholder="Nom d'utilisateur" required>
-      <input type="password" name="password" placeholder="Mot de passe" required>
-      <button type="submit">Se connecter</button>
+    <div class="login-header">
+      <div class="logo">
+      </div>
+      <h2>Connexion Admin</h2>
+      <p class="login-subtitle">Accès sécurisé au panneau d'administration</p>
+    </div>
+
+    <div class="security-illustration">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#0e4989" />
+            <stop offset="100%" stop-color="#b308de" />
+          </linearGradient>
+        </defs>
+        <path d="M100,20 C120,20 140,30 150,40 L100,180 L50,40 C60,30 80,20 100,20 Z" fill="url(#shieldGradient)" opacity="0.8" />
+        <circle cx="100" cy="80" r="30" fill="white" />
+        <path d="M90,75 L100,85 L115,65" fill="none" stroke="#0e4989" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+
+    <form id="login-form" >
+      <div class="input-group">
+        <i class="fas fa-user input-icon"></i>
+        <input type="text" name="username" placeholder="Nom d'utilisateur" required>
+      </div>
+      
+      <div class="input-group">
+        <i class="fas fa-lock input-icon"></i>
+        <input type="password" name="password" placeholder="Mot de passe" required>
+      </div>
+      
+      <button type="submit">
+        <i class="fas fa-sign-in-alt"></i> Se connecter
+      </button>
+      
       <p id="login-error" class="error-message"></p>
     </form>
   </div>

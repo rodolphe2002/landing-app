@@ -6,6 +6,7 @@ const Temoignage = require('../models/Temoignage');
 const Utilisateur = require('../models/Utlisateurs'); 
 const Admin = require('../models/Admins'); // 🛠️ adapte le chemin si besoin
 const bcryptjs = require('bcryptjs');
+const { storage } = require('../config/cloudinary'); // ← on importe le storage Cloudinary
 
 
 const multer = require('multer');
@@ -14,15 +15,15 @@ const mongoose = require('mongoose');
 
 
 // Configuration de multer pour le stockage des fichiers
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname,'../../public/img') ); //  Dossier où seront stockées les images
-  },
-  filename: (req, file, cb) => {
-    const uniqueName = Date.now() + '-' + file.originalname;
-    cb(null, uniqueName);
-  }
-});
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, path.join(__dirname,'../../public/img') ); //  Dossier où seront stockées les images
+//   },
+//   filename: (req, file, cb) => {
+//     const uniqueName = Date.now() + '-' + file.originalname;
+//     cb(null, uniqueName);
+//   }
+// });
 
 // 🧩 Initialisation de multer avec le storage défini
 const upload = multer({ storage });
@@ -34,15 +35,14 @@ const upload = multer({ storage });
  */
 router.post('/formations', upload.single('image'), async (req, res) => {
   try {
-    const { titre,slug,accroche,description,duree,prix,videoUrl,niveau,categorie,dateDebut} = req.body;
-    const imageUrl = req.file ? `/img/${req.file.filename}` : ''; // ⬅️ on récupère l'image téléchargée
+    const { titre, slug, accroche, description, duree, prix, videoUrl, niveau, categorie, dateDebut } = req.body;
 
-    // Vérification des champs requis
     if (!titre || !slug || !description || !prix || !accroche || !duree || !niveau || !categorie || !dateDebut) {
       return res.status(400).json({ message: "Tous les champs obligatoires doivent être remplis." });
     }
 
-    // Création d'une nouvelle formation
+    const imageUrl = req.file?.path; // ← URL Cloudinary
+
     const nouvelleFormation = new Formation({
       titre,
       slug,
@@ -66,6 +66,7 @@ router.post('/formations', upload.single('image'), async (req, res) => {
   }
 });
 
+
 /**
  * @route   POST /api/temoignages
  * @desc    Ajouter un témoignage client lié à une formation
@@ -79,25 +80,23 @@ router.post('/temoignages', upload.single('avatar'), async (req, res) => {
       return res.status(400).json({ message: "Tous les champs sont requis." });
     }
 
-    // Vérification si la formation existe
     const formation = await Formation.findById(formationId);
-    if (!formation) {
-      return res.status(404).json({ message: "Formation non trouvée" });
-    }
+    if (!formation) return res.status(404).json({ message: "Formation non trouvée" });
+
+    const avatarUrl = req.file?.path; // ← URL Cloudinary
 
     const nouveauTemoignage = new Temoignage({
       nomClient,
       message,
-      avatar: req.file ? `/img/${req.file.filename}` : '',
+      avatar: avatarUrl,
       formationId
     });
 
     await nouveauTemoignage.save();
-
     res.status(201).json({ message: "Témoignage ajouté avec succès", temoignage: nouveauTemoignage });
 
-  } catch (error) {
-    console.error("Erreur ajout témoignage :", error);
+  } catch (err) {
+    console.error("Erreur ajout témoignage :", err);
     res.status(500).json({ message: "Erreur serveur" });
   }
 });
@@ -218,8 +217,31 @@ router.post('/login', async (req, res) => {
 
 
 
+router.get('/sessions/:slug', async (req, res) => {
+  try {
+    const formation = await Formation.findOne({ slug: req.params.slug });
+    if (!formation) return res.status(404).json({ message: "Formation non trouvée" });
+
+    const testimonials = await Temoignage.find({ formationId: formation._id });
+
+    res.json({ formation, testimonials });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Erreur serveur" });
+  }
+});
+
+
+
+
+
+
+
+
 
 
 
 
 module.exports = router;
+
+

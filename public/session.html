@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Détail de la Session | Formation Premium</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+ <link rel="stylesheet" href="./session.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <img src="./img/logo.jpg" alt="ECEFA Formations">
+    </div>
+    <div class="menu-toggle">
+      <i class="fas fa-bars"></i>
+    </div>
+    <nav class="nav">
+        <ul>
+        <li><a href="./index.html">Voir toutes les formations  </a></li>
+        
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="formation-hero">
+    <div class="formation-hero-content">
+      <div class="formation-hero-text">
+        <h1 id="formation-title" class="animated-element">Titre de la formation</h1>
+        <div class="formation-meta">
+          <div class="meta-item animated-element" style="animation-delay: 0.1s">
+            <i class="fas fa-clock"></i>
+            <span id="formation-duree">Durée: Non spécifiée</span>
+          </div>
+          <div class="meta-item animated-element" style="animation-delay: 0.2s">
+            <i class="fas fa-tag"></i>
+            <span id="formation-prix">Prix: Non spécifié</span>
+          </div>
+          <div class="meta-item animated-element" style="animation-delay: 0.3s">
+            <i class="fas fa-layer-group"></i>
+            <span id="formation-niveau">Niveau: Non spécifié</span>
+          </div>
+          <div class="meta-item animated-element" style="animation-delay: 0.4s">
+            <i class="fas fa-calendar-alt"></i>
+            <span id="formation-date">Date: À définir</span>
+          </div>
+        </div>
+        <div class="btn-group">
+          <a href="#" class="btn-primary animated-element" style="animation-delay: 0.5s"  onclick="toggleForm()">
+            <i class="fas fa-user-plus"></i> S'inscrire maintenant
+          </a>
+          <a href="#" class="btn-secondary animated-element" style="animation-delay: 0.6s">
+            <i class="fas fa-download"></i> Télécharger le programme
+          </a>
+        </div>
+      </div>
+      <div class="formation-hero-image animated-element" style="animation-delay: 0.2s">
+        <img id="formation-image" src="" alt="Image de la formation">
+      </div>
+    </div>
+  </section>
+
+  <!-- Details Section -->
+  <section class="formation-details">
+    <div class="details-grid">
+      <div class="description-content animated-element">
+        <h2>Description de la formation</h2>
+        <p id="formation-description">Description en cours de chargement...</p>
+        
+        <!-- <h2 style="margin-top: 40px">Ce que vous allez apprendre</h2>
+        <ul class="features-list">
+          <li><i class="fas fa-check-circle"></i> Compétence essentielle #1</li>
+          <li><i class="fas fa-check-circle"></i> Technique avancée #2</li>
+          <li><i class="fas fa-check-circle"></i> Méthodologie professionnelle #3</li>
+          <li><i class="fas fa-check-circle"></i> Outils spécialisés #4</li>
+          <li><i class="fas fa-check-circle"></i> Cas pratiques réels #5</li>
+        </ul> -->
+      </div>
+      
+      <div class="video-container animated-element" style="animation-delay: 0.3s">
+        <div class="video-placeholder">
+          <div class="video-play-btn">
+            <i class="fas fa-play"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Témoignages</h2>
+      </div>
+      
+      <div class="testimonials-container" id="testimonials-container">
+        <!-- Les témoignages seront injectés ici par JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- Floating Button -->
+  <!-- <button class="floating-btn">
+    <i class="fas fa-comment"></i>
+  </button> -->
+
+    <!-- Bouton flottant -->
+  <button class="floating-btn" onclick="toggleForm()">
+    <i class="fas fa-pen"></i>
+  </button>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-content">
+      <h2>Prêt à transformer votre carrière?</h2>
+      <p>Rejoignez notre formation premium et accédez à un apprentissage d'exception avec des experts du secteur.</p>
+      <a href="#" class="btn-primary" onclick="toggleForm()">
+        <i class="fas fa-user-plus"></i> Réserver ma place maintenant
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+<footer class="footer">
+    <div class="footer-container">
+      <div class="footer-logo">
+        <h2>ECEFA<span> FORMATION</span></h2>
+        <div class="footer-contact">
+          <p><i class="fas fa-map-marker-alt"></i> Agence de Teicheville</p>
+          <p><i class="fas fa-phone"></i> 25 21 00 24 02</p>
+          <p><i class="fas fa-mobile-alt"></i> +225 07 58 18 75 21</p>
+          
+          <p><i class="fas fa-map-marker-alt"></i> Agence de Yopougon</p>
+          <p><i class="fas fa-mobile-alt"></i> +225 07 98 63 98 80</p>
+          <p><i class="fas fa-mobile-alt"></i> +225 01 03 19 41 06</p>
+          
+          <p><i class="fas fa-envelope"></i> <a href="mailto:formations@ecfa.ci">formations@ecefa.ci</a></p>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <h3>Navigation</h3>
+        <ul>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Accueil</a></li>
+          <li><a href="#formations-container"><i class="fas fa-chevron-right"></i> Nos formations</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Centres de Formations</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Découvrir ECEFA</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Carrières</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Politiques ECEFA</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-social">
+        <h3>Suivez-nous</h3>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/share/1FCaDT8UDm/?mibextid=wwXIfr"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-x-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="copyright">Copyright 2025 Groupe ECEFA - Tous droits réservés</p>
+    </div>
+  </footer>
+
+
+
+
+  <!-- Formulaire (popup) -->
+  <div id="form-popup">
+    <div class="form-header">
+      <h3>Inscription</h3>
+      <button class="close-btn" onclick="toggleForm()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <form id="inscription-form">
+      <input type="text" placeholder="Nom complet" name="nom" required>
+      <input type="tel" placeholder="Numéro Whatsapp" name="Whatsapp" required>
+
+      <div class="form-section">
+        <div class="form-row">
+          <label for="desiredTraining">Formation Souhaitée</label>
+          <select id="desiredTraining" name="formation" required>
+            <option value="" disabled selected>Sélectionnez une formation</option>
+            <optgroup label="Techniques et maintenance">
+              <option value="conduite_engins">Conduite d'engins</option>
+              <option value="mecanique_engins">Mécanique engins</option>
+              <option value="maintenance_engins">Maintenance d'engins</option>
+              <option value="maintenance_automobile">Maintenance automobile</option>
+              <option value="froid_climatisation">Froid et climatisation</option>
+              <option value="installation_camera">Installation de caméras de surveillance</option>
+              <option value="installation_solaire">Installation d'énergie solaire</option>
+              <option value="securite_electronique">Sécurité électronique</option>
+            </optgroup>
+            <optgroup label="Bâtiment et travaux publics (BTP)">
+              <option value="construction_metallique">Construction métallique</option>
+              <option value="electricite_batiments">Électricité bâtiments</option>
+              <option value="plomberie">Plomberie et sanitaire</option>
+              <option value="amenagement_foncier">Aménagement foncier</option>
+              <option value="maconnerie">Maçonnerie</option>
+              <option value="peinture_batiments">Peinture de bâtiments</option>
+              <option value="carrelage">Carrelage</option>
+              <option value="charpenterie">Charpenterie</option>
+              <option value="ebenisterie">Ébénisterie</option>
+              <option value="vitrerie_aluminium">Vitrerie - Aluminium</option>
+            </optgroup>
+            <optgroup label="Sécurité et prévention">
+              <option value="securite_incendie">Sécurité incendie</option>
+              <option value="habilitation_hauteur">Habilitation travail en hauteur</option>
+              <option value="habilitation_electrique">Habilitation électrique</option>
+            </optgroup>
+            <optgroup label="Informatique et nouvelles technologies">
+              <option value="developpement_web">Développement web</option>
+              <option value="maintenance_informatique">Maintenance informatique</option>
+              <option value="securite_informatique">Sécurité informatique</option>
+              <option value="reseaux_informatiques">Réseaux informatiques</option>
+              <option value="reseaux_telecoms">Réseaux télécoms</option>
+              <option value="developpement_applications">Développement d'applications</option>
+              <option value="intelligence_artificielle">Intelligence artificielle</option>
+            </optgroup>
+            <optgroup label="Secrétariat et gestion">
+              <option value="secretaire_bureautique">Secrétaire bureautique</option>
+              <option value="secretaire_commerciale">Secrétaire commercial(e)</option>
+              <option value="secretaire_comptable">Secrétaire comptable</option>
+              <option value="gestionnaire_stocks">Gestionnaire de stocks</option>
+              <option value="caissiere_specialisee">Caissière spécialisée</option>
+              <option value="magasinier_cariste">Magasinier - Cariste</option>
+            </optgroup>
+            <optgroup label="Commerce et services">
+              <option value="vendeur_pharmacie">Vendeur(se) en pharmacie</option>
+              <option value="negociateur_specialise">Négociateur(trice) spécialisé(e)</option>
+              <option value="conseiller_clientele">Conseiller(ère) clientèle</option>
+              <option value="rayonniste">Rayonniste</option>
+            </optgroup>
+            <optgroup label="Agriculture et environnement">
+              <option value="operateur_huilerie">Opérateur huilerie</option>
+              <option value="operateur_savonnerie">Opérateur savonnerie</option>
+              <option value="aviculture">Aviculture</option>
+              <option value="pisciculture_hors_sol">Pisciculture hors-sol</option>
+            </optgroup>
+            <optgroup label="Services généraux">
+              <option value="agent_entretien">Agent d'entretien</option>
+            </optgroup>
+            <optgroup label="Géomatique">
+              <option value="assistant_geometre">Assistant géomètre</option>
+              <option value="assistant_topographe">Assistant topographe</option>
+            </optgroup>
+            <optgroup label="Langues et communication">
+              <option value="anglais">Anglais</option>
+              <option value="traducteur_anglais_francais">Traducteur(trice) anglais - français</option>
+              <option value="infographie">Infographie</option>
+              <option value="community_management">Community management</option>
+            </optgroup>
+            <optgroup label="Entrepreneuriat">
+              <option value="entrepreneuriat">Entrepreneuriat</option>
+            </optgroup>
+            <option value="autres">Autre (précisez)</option>
+          </select>
+        </div>
+      </div>
+      <br>
+      <button type="submit">Envoyer</button>
+    </form>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="./session.js"></script>
+  <script src="./main.js"></script>
+</body>
+</html>

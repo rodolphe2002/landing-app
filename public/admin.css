@@ -1,9 +1,4 @@
-* {
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 0;
-  }
+
 
   body {
     background: #959da83c;
@@ -282,42 +277,558 @@
     display: none;
   }
   
+  
+
   @media (max-width: 768px) {
-    .sidebar {
-      position: fixed;
-      left: -250px;
-      top: 0;
-      height: 100%;
-      transition: left 0.3s ease;
-      z-index: 1000;
+  .sidebar {
+    left: -280px;
+    position: fixed;
+    z-index: 1000;
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+
+  #toggle-btn {
+    display: block;
+  }
+
+  .dashboard-container {
+    margin-left: 0;
+    padding-top: 80px;
+  }
+
+  .dashboard-container.sidebar-open {
+    margin-left: 280px;
+  }
+}
+
+
+
+  
+
+/* new css */
+
+
+      :root {
+      --primary: #0e4989;
+      --secondary: #ed4b06;
+      --accent: #b308de;
+      --dark: #111827;
+      --light: #f9fafb;
+      --gray: #6b7280;
+      --transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      --radius: 12px;
     }
 
-    .sidebar h2{
-      margin-left: 47px;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-  
-    .sidebar.active {
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f0f2f5;
+      color: var(--dark);
+      line-height: 1.6;
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      background: var(--dark);
+      color: white;
+      height: 100vh;
+      position: fixed;
+      right: 0;
+      top: 0;
+      padding: 20px 0;
+      transition: var(--transition);
+      z-index: 1000;
+      box-shadow: 3px 0 15px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+    }
+
+    .sidebar::before {
+      content: '';
+      position: absolute;
+      top: 0;
       left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
     }
-  
+
+    .sidebar-header {
+      padding: 0 20px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .sidebar-header h2 {
+      font-size: 1.5rem;
+      background: linear-gradient(90deg, var(--secondary), var(--light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .sidebar nav ul {
+      list-style: none;
+    }
+
+    .sidebar nav ul li {
+      margin-bottom: 5px;
+    }
+
+    .sidebar nav ul li a {
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      transition: var(--transition);
+      font-weight: 500;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sidebar nav ul li a i {
+      margin-right: 15px;
+      font-size: 1.2rem;
+      width: 24px;
+      text-align: center;
+    }
+
+    .sidebar nav ul li a:hover {
+      color: white;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .sidebar nav ul li a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--secondary);
+      transform: translateX(-100%);
+      transition: var(--transition);
+    }
+
+    .sidebar nav ul li a:hover::before {
+      transform: translateX(0);
+    }
+
+    .sidebar nav ul li a.active {
+      color: white;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .sidebar nav ul li a.active::before {
+      transform: translateX(0);
+    }
+
+    #logout-btn {
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: calc(100% - 40px);
+      margin: 30px 20px 0;
+      box-shadow: 0 5px 15px rgba(237, 75, 6, 0.3);
+    }
+
+    #logout-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(237, 75, 6, 0.4);
+    }
+
+    #logout-btn i {
+      margin-right: 10px;
+    }
+
+    /* Dashboard Container */
+    .dashboard-container {
+      flex: 1;
+      margin-left: 280px;
+      padding: 30px;
+      transition: var(--transition);
+    }
+
+    /* Toggle Button */
     #toggle-btn {
-      display: block;
+      display: none;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 999;
+      box-shadow: var(--shadow-lg);
+      transition: var(--transition);
     }
-  
-    .main-content {
-      margin-left: 0;
-      padding: 2rem 1rem;
+
+    #toggle-btn:hover {
+      background: var(--secondary);
+      transform: scale(1.05);
     }
+
+    /* Section Styles */
+    .section-title {
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid rgba(14, 73, 137, 0.1);
+    }
+
+    .section-title h2 {
+      font-size: 1.8rem;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+    }
+
+    .section-title h2 i {
+      margin-right: 15px;
+      color: var(--secondary);
+      background: rgba(237, 75, 6, 0.1);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .form-section, .inscriptions-section {
+      background: white;
+      border-radius: var(--radius);
+      padding: 30px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+    }
+
+    .form-section:hover, .inscriptions-section:hover {
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Form Styles */
+    .box-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .box-form input,
+    .box-form textarea,
+    .box-form select {
+      width: 100%;
+      padding: 14px 20px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      transition: var(--transition);
+      background: rgba(14, 73, 137, 0.03);
+    }
+
+    .box-form input:focus,
+    .box-form textarea:focus,
+    .box-form select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(14, 73, 137, 0.2);
+    }
+
+    .box-form textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .box-form button[type="submit"] {
+      grid-column: span 2;
+      padding: 15px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 10px;
+    }
+
+    .box-form button[type="submit"]:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(14, 73, 137, 0.3);
+    }
+
+    /* Table Styles */
+    .inscriptions-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      box-shadow: var(--shadow-sm);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .inscriptions-table thead {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: white;
+    }
+
+    .inscriptions-table th {
+      padding: 15px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .inscriptions-table td {
+      padding: 15px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .inscriptions-table tbody tr {
+      transition: var(--transition);
+    }
+
+    .inscriptions-table tbody tr:nth-child(even) {
+      background: rgba(14, 73, 137, 0.02);
+    }
+
+    .inscriptions-table tbody tr:hover {
+      background: rgba(237, 75, 6, 0.03);
+      transform: translateX(5px);
+    }
+
+    /* Message */
+    #message {
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 20px;
+      text-align: center;
+      font-weight: 500;
+      display: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .sidebar {
+        width: 240px;
+      }
+      
+      .dashboard-container {
+        margin-left: 240px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      #toggle-btn {
+        display: block;
+      }
+      
+      .sidebar {
+        transform: translateX(-100%);
+        width: 280px;
+      }
+      
+      .sidebar.active {
+        transform: translateX(0);
+      }
+      
+      .dashboard-container {
+        margin-left: 0;
+        padding: 20px;
+      }
+      
+      .dashboard-container.active {
+        transform: translateX(280px);
+      }
+      
+      .box-form {
+        grid-template-columns: 1fr;
+      }
+      
+      .box-form button[type="submit"] {
+        grid-column: span 1;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .section-title h2 {
+        font-size: 1.5rem;
+      }
+      
+      .form-section, .inscriptions-section {
+        padding: 20px;
+      }
+      
+      .inscriptions-table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Responsive sur petits écrans */
+@media (max-width: 600px) {
+  body {
+    padding: 1rem;
   }
-  
-  
-  
-  
-  
-  @media (min-width: 900px) {
-    .form-container {
-      flex-direction: row;
-      align-items: flex-start;
-    }
+
+  form {
+    padding: 1.2rem;
   }
-  
+
+  .inscriptions-table th,
+  .inscriptions-table td {
+    padding: 0.8rem;
+    font-size: 14px;
+  }
+}
+
+
+
+
+
+
+
+
+/* Conteneur général du tableau de bord */
+.dashboard-container {
+  max-width: 1200px;
+  margin: auto;
+  animation: fadeIn 1s ease-in-out;
+}
+
+
+
+/* Animation d’apparition */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+
+/* Animation sidebar */
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Bouton de menu toggle (responsive) */
+#toggle-btn {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1001;
+  background: #1a1a2e;
+  color: white;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  display: none;
+}
+
+/* Responsive sidebar pour mobiles */
+@media (max-width: 768px) {
+  .sidebar {
+    left: -280px;
+    position: fixed;
+    z-index: 1000;
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+
+  #toggle-btn {
+    display: block;
+  }
+
+  .dashboard-container {
+    margin-left: 0;
+    padding-top: 80px;
+  }
+
+  .dashboard-container.sidebar-open {
+    margin-left: 280px;
+  }
+}
+
