@@ -45,6 +45,9 @@ document.getElementById('logout-btn').addEventListener('click', () => {
       chargerFormations();
       chargerInscriptions();
       initFormSubmissions();
+      afficherFormations();
+       afficherTemoignages(); // pour afficher automatiquement les témoignages
+
     });
 
     // Initialisation du menu admin
@@ -102,30 +105,53 @@ document.getElementById('logout-btn').addEventListener('click', () => {
     }
 
     // Charger les inscriptions
-    async function chargerInscriptions() {
-      try {
-        const res = await fetch(`${BASE_URL}/api/inscriptions`);
-        const data = await res.json();
-        const tbody = document.querySelector('#inscriptions-table tbody');
-        
-        // Vider le tableau
-        tbody.innerHTML = "";
-        
-        // Ajouter les nouvelles lignes
-        data.forEach(user => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${user.nom}</td>
-            <td>${user.Whatsapp}</td>
-            <td>${user.formation}</td>
-          `;
-          tbody.appendChild(row);
-        });
-      } catch (err) {
-        console.error('Erreur de chargement des inscriptions :', err);
-        showMessage("Erreur lors du chargement des inscriptions", "error");
-      }
-    }
+async function chargerInscriptions() {
+  try {
+    const res = await fetch(`${BASE_URL}/api/inscriptions`);
+    const data = await res.json();
+    const tbody = document.querySelector('#inscriptions-table tbody');
+    
+    // Vider le tableau
+    tbody.innerHTML = "";
+
+    // Ajouter les nouvelles lignes
+    data.forEach(user => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${user.nom}</td>
+        <td>${user.Whatsapp}</td>
+        <td>${user.formation}</td>
+        <td><button class="supprimer-btn" data-id="${user._id}">🗑️ Supprimer</button></td>
+      `;
+      tbody.appendChild(row);
+    });
+
+    // ✅ Ajouter les événements de suppression ici
+    document.querySelectorAll('.supprimer-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = btn.dataset.id;
+        if (confirm("Confirmer la suppression de cet inscrit ?")) {
+          try {
+            const res = await fetch(`${BASE_URL}/api/inscriptions/${id}`, {
+              method: 'DELETE'
+            });
+            const result = await res.json();
+            showMessage(result.message, "success");
+            chargerInscriptions(); // Recharge la liste après suppression
+          } catch (err) {
+            console.error("Erreur lors de la suppression :", err);
+            showMessage("Erreur de suppression", "error");
+          }
+        }
+      });
+    });
+
+  } catch (err) {
+    console.error('Erreur de chargement des inscriptions :', err);
+    showMessage("Erreur lors du chargement des inscriptions", "error");
+  }
+}
+
 
     // Initialiser les soumissions de formulaire
     function initFormSubmissions() {
@@ -215,3 +241,216 @@ document.getElementById('logout-btn').addEventListener('click', () => {
         messageEl.style.display = 'none';
       }, 3000);
     }
+
+
+
+
+
+    // Modifier une formation
+
+
+    async function afficherFormations() {
+  const res = await fetch(`${BASE_URL}/api/formations`);
+  const data = await res.json();
+  const tbody = document.querySelector('#table-formations tbody');
+  tbody.innerHTML = "";
+
+  data.forEach(f => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${f.titre}</td>
+      <td>${f.duree}</td>
+      <td>${f.prix} FCFA</td>
+      <td>
+        <button onclick="ouvrirModalFormation('${f._id}', '${f.titre}', '${f.duree}', '${f.prix}', \`${f.description}\`)">Modifier</button>
+        <button onclick="supprimerFormation('${f._id}')">Supprimer</button>
+      </td>
+    `;
+    tbody.appendChild(row);
+  });
+}
+
+function ouvrirModalFormation(id, titre, duree, prix, description) {
+  document.getElementById('edit-id').value = id;
+  document.getElementById('edit-titre').value = titre;
+  document.getElementById('edit-duree').value = duree;
+  document.getElementById('edit-prix').value = prix;
+  document.getElementById('edit-description').value = description;
+  document.getElementById('modal-formation').classList.remove('hidden');
+}
+
+document.querySelector('.modal .close').addEventListener('click', () => {
+  document.getElementById('modal-formation').classList.add('hidden');
+});
+
+document.getElementById('edit-formation-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const id = document.getElementById('edit-id').value;
+  const data = {
+    titre: document.getElementById('edit-titre').value,
+    duree: document.getElementById('edit-duree').value,
+    prix: document.getElementById('edit-prix').value,
+    description: document.getElementById('edit-description').value,
+  };
+
+  const res = await fetch(`${BASE_URL}/api/formations/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  });
+
+  if (res.ok) {
+    showMessage("Formation modifiée avec succès", "success");
+    document.getElementById('modal-formation').classList.add('hidden');
+    afficherFormations();
+    chargerFormations();
+  } else {
+    showMessage("Erreur de modification", "error");
+  }
+});
+
+
+
+
+// Supprimer une formation
+
+
+async function supprimerFormation(id) {
+  if (!confirm("Voulez-vous vraiment supprimer cette formation ?")) return;
+
+  const res = await fetch(`${BASE_URL}/api/formations/${id}`, {
+    method: 'DELETE'
+  });
+
+  if (res.ok) {
+    showMessage("Formation supprimée avec succès", "success");
+    afficherFormations();
+    chargerFormations();
+  } else {
+    showMessage("Erreur lors de la suppression", "error");
+  }
+}
+
+
+
+
+
+
+
+
+// Affichage des témoignages
+async function afficherTemoignages() {
+  const res = await fetch(`${BASE_URL}/api/temoignages`);
+  const data = await res.json();
+  const tbody = document.querySelector('#table-temoignages tbody');
+  tbody.innerHTML = "";
+
+  data.forEach(t => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${t.nomClient}</td>
+      <td>${t.message}</td>
+      <td>
+        <button onclick="ouvrirModalTemoignage('${t._id}', '${t.nom}', \`${t.message}\`)">Modifier</button>
+        <button onclick="supprimerTemoignage('${t._id}')">Supprimer</button>
+      </td>
+    `;
+    tbody.appendChild(row);
+  });
+}
+
+// Ouvrir le modal de modification
+function ouvrirModalTemoignage(id, nom, message) {
+  document.getElementById('edit-temoignage-id').value = id;
+  document.getElementById('edit-temoignage-nom').value = nom;
+  document.getElementById('edit-temoignage-message').value = message;
+  document.getElementById('modal-temoignage').classList.remove('hidden');
+}
+
+// Fermer le modal
+document.querySelector('.close-temoignage').addEventListener('click', () => {
+  document.getElementById('modal-temoignage').classList.add('hidden');
+});
+
+// Soumettre la modification
+document.getElementById('edit-temoignage-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const id = document.getElementById('edit-temoignage-id').value;
+  const data = {
+    nom: document.getElementById('edit-temoignage-nom').value,
+    message: document.getElementById('edit-temoignage-message').value,
+  };
+
+  const res = await fetch(`${BASE_URL}/api/temoignages/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  });
+
+  if (res.ok) {
+    showMessage("Témoignage modifié avec succès", "success");
+    document.getElementById('modal-temoignage').classList.add('hidden');
+    afficherTemoignages();
+  } else {
+    showMessage("Erreur de modification", "error");
+  }
+});
+
+// Supprimer un témoignage
+async function supprimerTemoignage(id) {
+  if (!confirm("Voulez-vous vraiment supprimer ce témoignage ?")) return;
+
+  const res = await fetch(`${BASE_URL}/api/temoignages/${id}`, {
+    method: 'DELETE'
+  });
+
+  if (res.ok) {
+    showMessage("Témoignage supprimé avec succès", "success");
+    afficherTemoignages();
+  } else {
+    showMessage("Erreur lors de la suppression", "error");
+  }
+}
+
+
+
+document.getElementById('generate-pdf').addEventListener('click', async () => {
+  try {
+    const res = await fetch(`${BASE_URL}/api/inscriptions`);
+    const data = await res.json();
+
+    // Initialise jsPDF
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Titre
+    doc.setFontSize(18);
+    doc.text('Liste des Inscrits', 14, 20);
+
+    // Préparer les lignes du tableau
+    const rows = data.map((user, index) => [
+      index + 1,
+      user.nom,
+      user.Whatsapp,
+      user.formation
+    ]);
+
+    // Générer le tableau
+    doc.autoTable({
+      head: [['#', 'Nom', 'WhatsApp', 'Formation']],
+      body: rows,
+      startY: 30
+    });
+
+    // Télécharger le PDF
+    doc.save('liste_inscrits.pdf');
+  } catch (err) {
+    console.error("Erreur lors de la génération du PDF :", err);
+    showMessage("Erreur génération PDF", "error");
+  }
+});
+

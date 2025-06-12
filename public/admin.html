@@ -6,6 +6,9 @@
   <title>Interface Admin ECEFA</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <link rel="stylesheet" href="./admin.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
 </head>
 <body>
   <button id="toggle-btn">
@@ -21,7 +24,11 @@
         <li><a href="#form-section" class="active"><i class="fas fa-plus-circle"></i> Ajouter Formation</a></li>
         <li><a href="#testimony-section"><i class="fas fa-comment-alt"></i> Ajouter Témoignage</a></li>
         <li><a href="#inscriptions-section"><i class="fas fa-users"></i> Voir Inscriptions</a></li>
+        <li><a href="#liste-formation"><i class="fas fa-edit"></i> Editer Formations</a></li>
+        <li><a href="#liste-temoignages"><i class="fas fa-edit"></i> Editer Témoignages</a></li>
       </ul>
+      <button id="generate-pdf" class="generate-pdf">📄 Télécharger la liste PDF</button>
+
       <button id="logout-btn">
         <i class="fas fa-sign-out-alt"></i> Se déconnecter
       </button>
@@ -29,6 +36,7 @@
   </div>
 
   <div class="dashboard-container">
+    <p id="message"></p>
     <section id="form-section" class="form-section">
       <div class="section-title">
         <h2><i class="fas fa-book"></i> Ajouter une nouvelle formation</h2>
@@ -73,6 +81,12 @@
       </form>
     </section>
 
+
+
+
+
+
+
     <section id="testimony-section" class="form-section"> 
       <div class="section-title">
         <h2><i class="fas fa-comment-medical"></i> Ajouter un témoignage client</h2>
@@ -110,6 +124,7 @@
             <th>Nom</th>
             <th>WhatsApp</th>
             <th>Formation</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -118,8 +133,94 @@
       </table>
     </section>
 
-    <p id="message"></p>
+    
+
+
+
+
+    <!-- Afficher la liste avec boutons Modifier / Supprimer -->
+
+<section id="liste-formation" class="liste-formations inscriptions-table form-section">
+    <div class="section-title">
+      <h2><i class="fas fa-edit"></i> Gérer les formations</h2>
+    </div>
+  
+  <table id="table-formations">
+    <thead>
+      <tr>
+        <th>Titre</th>
+        <th>Durée</th>
+        <th>Prix</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Contenu généré dynamiquement -->
+    </tbody>
+  </table>
+</section>
+
+
+
+
+
+
+<!-- Section Témoignages -->
+<section id="liste-temoignages" class="liste-formations inscriptions-table form-section">
+  <div class="section-title">
+    <h2><i class="fas fa-comment"></i> Gérer les témoignages</h2>
   </div>
+
+  <table id="table-temoignages">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Message</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Contenu généré dynamiquement -->
+    </tbody>
+  </table>
+</section>
+  </div>
+
+
+<!-- Fenêtre pop-up pour modification -->
+
+
+  <div id="modal-formation" class="modal hidden">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>Modifier la formation</h3>
+    <form id="edit-formation-form">
+      <input type="hidden" name="id" id="edit-id">
+      <input type="text" name="titre" id="edit-titre" required>
+      <input type="text" name="duree" id="edit-duree" required>
+      <input type="number" name="prix" id="edit-prix" required>
+      <textarea name="description" id="edit-description" required></textarea>
+      <button type="submit">Enregistrer les modifications</button>
+    </form>
+  </div>
+</div>
+
+
+
+<!-- Modal de modification de témoignage -->
+<div id="modal-temoignage" class="modal hidden">
+  <div class="modal-content">
+    <span class="close-temoignage">&times;</span>
+    <h3>Modifier le témoignage</h3>
+    <form id="edit-temoignage-form">
+      <input type="hidden" name="id" id="edit-temoignage-id">
+      <input type="text" name="nom" id="edit-temoignage-nom" required>
+      <textarea name="message" id="edit-temoignage-message" required></textarea>
+      <button type="submit">Enregistrer les modifications</button>
+    </form>
+  </div>
+</div>
+
 
   <script src="./admin.js"></script>
 </body>

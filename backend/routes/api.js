@@ -172,6 +172,24 @@ router.post('/inscription', async (req, res) => {
 
 
 
+// 🗑️ Supprimer une inscription
+router.delete('/inscriptions/:id', async (req, res) => {
+  try {
+    const inscription = await Utilisateur.findByIdAndDelete(req.params.id); // 🔁 Changement ici
+    if (!inscription) {
+      return res.status(404).json({ message: 'Inscription non trouvée' });
+    }
+    res.status(200).json({ message: 'Inscription supprimée avec succès' });
+  } catch (err) {
+    console.error("Erreur suppression inscription :", err);
+    res.status(500).json({ message: 'Erreur serveur' });
+  }
+});
+
+
+
+
+
 
 
 
@@ -230,6 +248,92 @@ router.get('/sessions/:slug', async (req, res) => {
     res.status(500).json({ message: "Erreur serveur" });
   }
 });
+
+
+
+
+
+
+
+/**
+ * @route   PUT /api/formations/:id
+ * @desc    Modifier une formation existante
+ * @access  Admin
+ */
+router.put('/formations/:id', upload.single('image'), async (req, res) => {
+  try {
+    const updatedData = req.body;
+    if (req.file) {
+      updatedData.imageUrl = req.file.path;
+    }
+
+    const updatedFormation = await Formation.findByIdAndUpdate(req.params.id, updatedData, { new: true });
+
+    if (!updatedFormation) {
+      return res.status(404).json({ message: "Formation non trouvée" });
+    }
+
+    res.status(200).json({ message: "Formation mise à jour avec succès", formation: updatedFormation });
+  } catch (err) {
+    console.error("Erreur mise à jour formation :", err);
+    res.status(500).json({ message: "Erreur serveur" });
+  }
+});
+
+/**
+ * @route   DELETE /api/formations/:id
+ * @desc    Supprimer une formation
+ * @access  Admin
+ */
+router.delete('/formations/:id', async (req, res) => {
+  try {
+    const deletedFormation = await Formation.findByIdAndDelete(req.params.id);
+    if (!deletedFormation) {
+      return res.status(404).json({ message: "Formation non trouvée" });
+    }
+
+    res.status(200).json({ message: "Formation supprimée avec succès" });
+  } catch (err) {
+    console.error("Erreur suppression formation :", err);
+    res.status(500).json({ message: "Erreur serveur" });
+  }
+});
+
+
+
+// PUT - Modifier un témoignage
+router.put('/temoignages/:id', async (req, res) => {
+  try {
+    const updatedData = req.body;
+    const updatedTemoignage = await Temoignage.findByIdAndUpdate(req.params.id, updatedData, { new: true });
+
+    if (!updatedTemoignage) {
+      return res.status(404).json({ message: "Témoignage non trouvé" });
+    }
+
+    res.status(200).json({ message: "Témoignage modifié avec succès", temoignage: updatedTemoignage });
+  } catch (err) {
+    console.error("Erreur modification témoignage :", err);
+    res.status(500).json({ message: "Erreur serveur" });
+  }
+});
+
+// DELETE - Supprimer un témoignage
+router.delete('/temoignages/:id', async (req, res) => {
+  try {
+    const deletedTemoignage = await Temoignage.findByIdAndDelete(req.params.id);
+    if (!deletedTemoignage) {
+      return res.status(404).json({ message: "Témoignage non trouvé" });
+    }
+
+    res.status(200).json({ message: "Témoignage supprimé avec succès" });
+  } catch (err) {
+    console.error("Erreur suppression témoignage :", err);
+    res.status(500).json({ message: "Erreur serveur" });
+  }
+});
+
+
 
 
 

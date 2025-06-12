@@ -634,6 +634,37 @@
       transform: translateX(5px);
     }
 
+
+
+        .inscriptions-table button {
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: calc(100% - 40px);
+      margin: 30px 20px 0;
+      box-shadow: 0 5px 15px rgba(237, 75, 6, 0.3);
+    }
+
+    .inscriptions-table button {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(237, 75, 6, 0.4);
+    }
+
+
+     .inscriptions-table button:hover {
+      background: var(--secondary);
+      transform: scale(1.05);
+    }
+
     /* Message */
     #message {
       padding: 15px;
@@ -701,34 +732,6 @@
         overflow-x: auto;
       }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -831,4 +834,191 @@
     margin-left: 280px;
   }
 }
+
+
+
+
+/* pop up  */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 8px;
+}
+.close {
+  float: right;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+.modal.hidden {
+  display: none;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+}
+.modal-content .close {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+
+
+#edit-formation-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    #edit-formation-form input,
+   #edit-formation-form textarea,
+   #edit-formation-form select {
+      width: 100%;
+      padding: 14px 20px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      transition: var(--transition);
+      background: rgba(14, 73, 137, 0.03);
+    }
+
+    #edit-formation-form input:focus,
+    #edit-formation-form textarea:focus,
+    #edit-formation-form select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(14, 73, 137, 0.2);
+    }
+
+    .box-form textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    #edit-formation-form button[type="submit"] {
+    
+      padding: 15px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 10px;
+    }
+
+    #edit-formation-form button[type="submit"]:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(14, 73, 137, 0.3);
+    }
+
+
+
+
+
+
+
+    .liste-formations button {
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: calc(100% - 40px);
+      margin: 30px 20px 0;
+      box-shadow: 0 5px 15px rgba(237, 75, 6, 0.3);
+    }
+
+    .liste-formations button {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(237, 75, 6, 0.4);
+    }
+
+
+     .liste-formations button:hover {
+      background: var(--secondary);
+      transform: scale(1.05);
+    }
+
+
+
+
+
+
+
+        #generate-pdf {
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: calc(100% - 40px);
+      margin: 30px 20px 0;
+      box-shadow: 0 5px 15px rgba(237, 75, 6, 0.3);
+    }
+
+    #generate-pdf:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(237, 75, 6, 0.4);
+    }
+
+    #generate-pdf i {
+      margin-right: 10px;
+    }
 
