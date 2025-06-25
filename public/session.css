@@ -146,13 +146,12 @@
       background: white;
     }
     
-    .details-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 50px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+   .details-grid {
+  display: block;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
     
     .description-content {
       background: white;
@@ -216,14 +215,14 @@
     }
     
     /* Section vidéo */
-    .video-container {
+    /* .video-container {
       position: relative;
       border-radius: var(--radius);
       overflow: hidden;
       box-shadow: var(--shadow-lg);
       transform: perspective(1000px) rotateY(5deg);
       transition: var(--transition);
-    }
+    } */
     
     .video-container:hover {
       transform: perspective(1000px) rotateY(0deg);
