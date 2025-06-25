@@ -1,5 +1,5 @@
-  // Configuration de base
-    // const BASE_URL = "http://localhost:3000";
+  // // Configuration de base
+  //   const BASE_URL = "http://localhost:3000";
     const BASE_URL = "https://landing-app-1ke2.onrender.com";
 
 

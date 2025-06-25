@@ -47,20 +47,20 @@ const BASE_URL = "https://landing-app-1ke2.onrender.com";
         document.getElementById('formation-date').textContent = `Date: ${formation.dateDebut ? new Date(formation.dateDebut).toLocaleDateString() : 'À définir'}`;
 
         // Mettre à jour la vidéo si disponible
-        const videoContainer = document.querySelector('.video-container');
-        if (formation.videoUrl) {
-          videoContainer.innerHTML = `
-            <iframe 
-              src="${formation.videoUrl}" 
-              width="100%" 
-              height="400" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen
-              style="border-radius: 16px;"
-            ></iframe>
-          `;
-        }
+        // const videoContainer = document.querySelector('.video-container');
+        // if (formation.videoUrl) {
+        //   videoContainer.innerHTML = `
+        //     <iframe 
+        //       src="${formation.videoUrl}" 
+        //       width="100%" 
+        //       height="400" 
+        //       frameborder="0" 
+        //       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        //       allowfullscreen
+        //       style="border-radius: 16px;"
+        //     ></iframe>
+        //   `;
+        // }
 
         // Générer les témoignages
         const testimonialsContainer = document.getElementById('testimonials-container');
@@ -175,3 +175,8 @@ const BASE_URL = "https://landing-app-1ke2.onrender.com";
   chargerDetailsFormation();
   initForm(); // <-- ajoute cette ligne
 });
+
+
+
+
+
