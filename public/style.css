@@ -103,7 +103,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 40px;
+      padding: 7px 40px;
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
       box-shadow: var(--shadow-sm);
@@ -122,7 +122,7 @@
     }
 
     .logo img {
-      height: 80px;
+      height: 65px;
       width: 150px;
       transition: var(--transition);
     }
